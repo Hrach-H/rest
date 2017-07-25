@@ -21,7 +21,9 @@ router.put('/ninjas/:id' /* id is a parameter/variable, that's why we need ':' *
 
 // Delete a ninja from the DB
 router.delete('/ninjas/:id', function(req, res, next) {
-    res.send({type: 'DELETE'});
+    Ninja.findByIdAndRemove({_id: req.params.id}).then(function(removedNinja) {
+        res.send(removedNinja);
+    });
 });
 
 module.exports = router;
